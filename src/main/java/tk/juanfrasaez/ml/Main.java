@@ -1,21 +1,16 @@
 package tk.juanfrasaez.ml;
 
 import static org.asynchttpclient.Dsl.asyncHttpClient;
+import static org.eclipse.jetty.http.HttpStatus.BAD_REQUEST_400;
 import static org.eclipse.jetty.http.HttpStatus.FORBIDDEN_403;
-import static spark.Spark.before;
-import static spark.Spark.get;
-import static spark.Spark.halt;
-import static spark.Spark.post;
+import static spark.Spark.*;
 
 import org.asynchttpclient.AsyncHttpClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
-import tk.juanfrasaez.ml.model.dto.DBSample;
-import tk.juanfrasaez.ml.model.dto.DBStats;
-import tk.juanfrasaez.ml.model.dto.Sample;
-import tk.juanfrasaez.ml.model.dto.Stats;
+import tk.juanfrasaez.ml.model.dto.*;
 import tk.juanfrasaez.ml.service.DNASequencing;
 
 import com.google.gson.Gson;
@@ -69,6 +64,8 @@ public class Main {
                 halt(FORBIDDEN_403);
             return "";
         });
+
+        exception(IllegalArgumentException.class, (exception, request, response) -> response.status(BAD_REQUEST_400));
 
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             logger.info("Shutting down application...");
