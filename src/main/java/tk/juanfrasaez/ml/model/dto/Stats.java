@@ -1,8 +1,15 @@
 package tk.juanfrasaez.ml.model.dto;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Stats {
+
+    @SerializedName("count_mutant_dna")
     private int countMutant;
+
+    @SerializedName("count_human_dna")
     private int countHuman;
+
     private double ratio;
 
     public int getCountMutant() {
@@ -26,6 +33,6 @@ public class Stats {
     }
 
     public void calculateRatio() {
-        this.ratio = (double) countMutant / countHuman;
+        this.ratio = countMutant > 0 ? (double) countMutant / countHuman : 1;
     }
 }
