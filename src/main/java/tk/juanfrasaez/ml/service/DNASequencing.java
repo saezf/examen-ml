@@ -7,7 +7,7 @@ public class DNASequencing {
      * there is more than one sequence of four equal nucleobases (AAAA, CCCC, GGGG, TTTT), then the DNA is mutant.
      *
      * @param dna the string array representation of a DNA molecule
-     * @return {@code true} if the DNA is mutant, {@code false} otherwise.
+     * @return {@code true} if the DNA is mutant, {@code false} otherwise
      * @throws IllegalArgumentException if dna is not a valid representation for an DNA molecule
      */
     public boolean isMutant(String[] dna) throws IllegalArgumentException {

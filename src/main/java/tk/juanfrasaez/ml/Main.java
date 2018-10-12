@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import tk.juanfrasaez.ml.model.dto.*;
+import tk.juanfrasaez.ml.service.DNAEncoding;
 import tk.juanfrasaez.ml.service.DNASequencing;
 
 import com.google.gson.Gson;
@@ -26,7 +27,8 @@ public class Main {
     public static void main(String[] args) {
         final Logger logger = LoggerFactory.getLogger(Main.class);
         final Gson gson = new Gson();
-        final DNASequencing service = new DNASequencing();
+        final DNASequencing sequencingService = new DNASequencing();
+        final DNAEncoding encodingService = new DNAEncoding();
         final JedisPool jedisPool = new JedisPool(REDIS_SRV);
         final AsyncHttpClient asyncHttpClient = asyncHttpClient();
 
@@ -47,12 +49,12 @@ public class Main {
 
         post("/mutant", (request, response) -> {
             Sample sample = gson.fromJson(request.body(), Sample.class);
-            DBSample dbSample = new DBSample(sample.toString());
+            DBSample dbSample = new DBSample(encodingService.encode(sample.toString()));
             String species;
             try (Jedis jedis = jedisPool.getResource()) {
                 species = jedis.get(dbSample.getDna());
                 if (species == null) {
-                    species = service.isMutant(sample.getDna()) ? MUTANT : HUMAN;
+                    species = sequencingService.isMutant(sample.getDna()) ? MUTANT : HUMAN;
                     jedis.set(dbSample.getDna(), species);
                     asyncHttpClient.preparePost(DB_API + "/sample/" + species)
                             .setHeader("Content-Type", "application/json")
