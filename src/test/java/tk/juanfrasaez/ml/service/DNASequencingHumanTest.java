@@ -34,7 +34,7 @@ public class DNASequencingHumanTest {
 
     @Test
     public void isHumanSequenceOf8() {
-        String[] dna = {"AGAGACTG", "AAGACGAA", "TTAGGACT", "CACAATGG", "TCTGACTC", "CGATCATA", "TGATCCCA", "AGATAGCC"};
+        String[] dna = {"AGAGACTG", "AAGACGAA", "TTAGGACT", "CGCAATGG", "TCTGACTC", "CGATCATA", "TGATCCCA", "AGATAGCC"};
         assertFalse(dnaSequencing.isMutant(dna));
     }
 
@@ -55,7 +55,7 @@ public class DNASequencingHumanTest {
     @Test
     public void isHumanSequenceOf11() {
         String[] dna = {"TGACATGAGCG", "GTGAAAGGCCA", "AGGTTACAGTT", "TGTCGCTCCTA",
-                "AACCTTAGATC", "AATGCTAAGGC", "TCACCCAAAAC", "ACTCAGTGATG", "GACCGGAATAG", "GCGTTCTCTAA", "CTTGCTGTCGA"};
+                "AACCTTAGATC", "AATGCTAAGGC", "TCACCCAGAAC", "ACTCAGTGATG", "GACCGGAATAG", "GCGTTCTCTAA", "CTTGCTGTCGA"};
         assertFalse(dnaSequencing.isMutant(dna));
     }
 
@@ -63,14 +63,14 @@ public class DNASequencingHumanTest {
     public void isHumanSequenceOf12() {
         String[] dna = {"AGCATTTGTTTA", "CGTTGATTGTGA", "TCAAGTATGTGG", "TGTTATCTCATG",
                 "ACTGAGCAAAGG", "GCTTCAGAAGCA", "GCGAATGGTCTG", "GTTATCATGATG",
-                "TTAACGTGTCCC", "CCGCTGGCGATA", "ATGGGCTTCAGC", "TTTTAGTCTAGC"};
+                "TTGACGTGTCCC", "CCGCTGGCGATA", "ATGGGCTTCAGC", "ATTTAGTCTAGC"};
         assertFalse(dnaSequencing.isMutant(dna));
     }
 
     @Test
     public void isHumanSequenceOf13() {
         String[] dna = {"GAAACCCGCGGAC", "GCTTTCGAACGGT", "TGAGTGCTCAATT", "GAACTGTCGTGCG",
-                "AAGGGGACCTATG", "TTAACAGAGGTGG", "TTCCTACGGGCCC", "AGTCACTGACTGT",
+                "AAGGCGACCTATG", "TTAACAGAGGTGG", "TTCCTACGGGCCC", "AGTCACTGACTGT",
                 "CAAGCAACCGGCC", "CCGGCTTCTGTCA", "TCTCACCACCAAA", "CCTCCGGTTGACT", "AAGCATTAGTCGT"};
         assertFalse(dnaSequencing.isMutant(dna));
     }

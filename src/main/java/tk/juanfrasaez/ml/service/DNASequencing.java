@@ -49,6 +49,18 @@ public class DNASequencing {
                             }
                         }
                     }
+                    if (column > 2) {
+                        positiveSlope = 0;
+                        for (int slope = column; slope >= 0; slope--) {
+                            positiveSlope += dna[slope].charAt(column - slope);
+                            if (positiveSlope % dna[slope].charAt(column - slope) > 0) {
+                                positiveSlope = dna[slope].charAt(column - slope);
+                            } else if (positiveSlope / 4 == dna[slope].charAt(column - slope)) {
+                                matchSequence++;
+                                positiveSlope = 0;
+                            }
+                        }
+                    }
                 } else {
                     if (dna.length - row > 3 && row + column < dna.length) {
                         negativeSlope += dna[row + column].charAt(column);
@@ -57,6 +69,15 @@ public class DNASequencing {
                         } else if (negativeSlope / 4 == dna[row + column].charAt(column)) {
                             matchSequence++;
                             negativeSlope = 0;
+                        }
+                    }
+                    if (dna.length - column > 3 && row + column < dna.length) {
+                        positiveSlope += dna[dna.length - column - 1].charAt(row + column);
+                        if (positiveSlope % dna[dna.length - column - 1].charAt(row + column) > 0) {
+                            positiveSlope = dna[dna.length - column - 1].charAt(row + column);
+                        } else if (positiveSlope / 4 == dna[dna.length - column - 1].charAt(row + column)) {
+                            matchSequence++;
+                            positiveSlope = 0;
                         }
                     }
                 }
