@@ -13,12 +13,14 @@ public class DNASequencing {
     public boolean isMutant(String[] dna) throws IllegalArgumentException {
         if (dna == null || dna.length < 4)
             throw new IllegalArgumentException();
+        for (int i = 0; i < dna.length; i++) {
+            if (dna[i].length() != dna.length)
+                throw new IllegalArgumentException();
+        }
         int matchSequence = 0;
         int[] vertical = new int[dna.length];
         for (int row = 0; row < dna.length; row++) {
             int horizontal = 0, positiveSlope = 0, negativeSlope = 0;
-            if (dna[row].length() != dna.length)
-                throw new IllegalArgumentException();
             for (int column = 0; column < dna.length; column++) {
                 if (!isValidNucleobaseRepresentation(dna[row].charAt(column)))
                     throw new IllegalArgumentException();
