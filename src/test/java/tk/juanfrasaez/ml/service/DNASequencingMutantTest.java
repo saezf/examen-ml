@@ -28,27 +28,27 @@ public class DNASequencingMutantTest {
 
     @Test
     public void isMutantSequenceOf7() {
-        String[] dna = {"TGGTCAT", "TATAGAA", "GTTCACG", "GGCGCAT", "AGATGTC", "ATCTTTT", "ATTATCC"};
+        String[] dna = {"TGGTCAT", "TATAGAA", "GTTCACG", "GGTGCAT", "AGATGTC", "ATCTTTT", "ATTATCC"};
         assertTrue(dnaSequencing.isMutant(dna));
     }
 
     @Test
     public void isMutantSequenceOf8() {
-        String[] dna = {"AGAGACTG", "AAGACGAA", "TTAGGACT", "CACAATGG", "TCTGACTC", "CGATCATA", "TGATCCCA", "AGATAGCC"};
+        String[] dna = {"AGAGACTG", "AAGACGAA", "TTAGGACT", "CACAATGG", "TCTCACTC", "CGATCATA", "TGATCCCA", "AGATAGCC"};
         assertTrue(dnaSequencing.isMutant(dna));
     }
 
     @Test
     public void isMutantSequenceOf9() {
         String[] dna = {"GGCGTAAGA", "CGGACGCGG", "GTGGATATG", "CGATCTAAC",
-                "ATAGCTATT", "AGCTATCAT", "AACTAGCTC", "TCTTTGGCG", "CATCCCATT"};
+                "ATAGCTATT", "AGCTATCAT", "AACTTGCTC", "TCTTTGGCG", "CATCCCATT"};
         assertTrue(dnaSequencing.isMutant(dna));
     }
 
     @Test
     public void isMutantSequenceOf10() {
-        String[] dna = {"TTGCATCAAG", "TAGGGCGATT", "CGATACGAGT", "CGCACACGTG",
-                "AAGTCGCGAG", "CGCTTCCACT", "ATGGGATTGA", "CGCTCGTCTA", "TAGGGTGAAG", "ACTAAGGTAA"};
+        String[] dna = {"TTGCATCAAG", "TAGGGCGATT", "CGATACAAGT", "CGCACACGTG",
+                "AAGTCGCGAG", "CGCTTCCACT", "ATGGGATTGA", "CGCTCGTGTA", "TAGGGTGAAG", "ACTAAGGTAA"};
         assertTrue(dnaSequencing.isMutant(dna));
     }
 

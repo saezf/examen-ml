@@ -14,12 +14,12 @@ public class DNASequencing {
         if (dna == null || dna.length < 4)
             throw new IllegalArgumentException();
         int matchSequence = 0;
-        int horizontal = 0;
         int[] vertical = new int[dna.length];
         for (int row = 0; row < dna.length; row++) {
+            int horizontal = 0, positiveSlope = 0, negativeSlope = 0;
             if (dna[row].length() != dna.length)
                 throw new IllegalArgumentException();
-            for (int column = 0; column < dna[row].length(); column++) {
+            for (int column = 0; column < dna.length; column++) {
                 if (!isValidNucleobaseRepresentation(dna[row].charAt(column)))
                     throw new IllegalArgumentException();
                 horizontal += dna[row].charAt(column);
@@ -35,6 +35,30 @@ public class DNASequencing {
                 } else if (vertical[column] / 4 == dna[row].charAt(column)) {
                     matchSequence++;
                     vertical[column] = 0;
+                }
+                if (row == 0) {
+                    if (dna.length - column > 3) {
+                        negativeSlope = 0;
+                        for (int slope = column; slope < dna.length - column; slope++) {
+                            negativeSlope += dna[slope].charAt(column + slope);
+                            if (negativeSlope % dna[slope].charAt(column + slope) > 0) {
+                                negativeSlope = dna[slope].charAt(column + slope);
+                            } else if (negativeSlope / 4 == dna[slope].charAt(column + slope)) {
+                                matchSequence++;
+                                negativeSlope = 0;
+                            }
+                        }
+                    }
+                } else {
+                    if (dna.length - row > 3 && row + column < dna.length) {
+                        negativeSlope += dna[row + column].charAt(column);
+                        if (negativeSlope % dna[row + column].charAt(column) > 0) {
+                            negativeSlope = dna[row + column].charAt(column);
+                        } else if (negativeSlope / 4 == dna[row + column].charAt(column)) {
+                            matchSequence++;
+                            negativeSlope = 0;
+                        }
+                    }
                 }
             }
         }
